@@ -111,6 +111,7 @@ presubmits:
           value: /tmp/cache
         - name: GOCACHE
           value: /tmp/cache
+  #test
   maistra-prow-testing/test-infra:
   - name: deploy-prow-test
     decorate: true
