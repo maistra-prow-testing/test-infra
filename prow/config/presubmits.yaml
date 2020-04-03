@@ -114,16 +114,21 @@ presubmits:
   maistra-prow-testing/test-infra:
   - name: deploy-prow-test
     decorate: true
+    always_run: true
+    skip_report: false
     labels:
       preset-prow-deployer: "true"
     max_concurrency: 1
-    path_alias: istio.io/test-infra
+    branches:
+    - ^master$
     spec:
       containers:
-      - command:
+      - image: "registry.gitlab.com/dgrimm/istio/maistra-builder:1.1"
+        imagePullPolicy: Always
+        command:
         - make
+        - gen-check
         - update-prow
-        image: "registry.gitlab.com/dgrimm/istio/maistra-builder:1.1"
   maistra-prow-testing/istio:
   - name: unittests
     decorate: true

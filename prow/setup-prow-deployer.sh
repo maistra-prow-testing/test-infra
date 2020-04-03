@@ -78,7 +78,8 @@ create_clusterrolebinding() {
 
 create_secret() {
     kubectl create secret generic ${SERVICE_ACCOUNT_NAME}-kubeconfig \
-        --from-file=kubeconfig.yaml=${KUBECFG_FILE_NAME}
+        --from-file=kubeconfig.yaml=${KUBECFG_FILE_NAME} \
+        --namespace test-pods
 }
 
 create_service_account
