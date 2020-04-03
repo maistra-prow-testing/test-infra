@@ -1,0 +1,27 @@
+postsubmits:
+  Maistra/test-infra:
+  - branches:
+    - ^master$
+    decorate: true
+    name: lint_test-infra_postsubmit
+    path_alias: istio.io/test-infra
+    spec:
+      containers:
+      - command:
+        - make
+        - gen-check
+        image: "registry.gitlab.com/dgrimm/istio/maistra-builder:1.1"
+  - branches:
+    - ^master$
+    decorate: true
+    labels:
+      preset-prow-deployer: "true"
+    max_concurrency: 1
+    name: deploy-prow
+    path_alias: istio.io/test-infra
+    spec:
+      containers:
+      - command:
+        - make
+        - update-prow
+        image: "registry.gitlab.com/dgrimm/istio/maistra-builder:1.1"

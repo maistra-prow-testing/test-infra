@@ -2,8 +2,10 @@
 
 set -ex
 
-# safety measure: make sure we're on the right cluster
-(kubectl get nodes | grep prow-worker-01) || (echo "Wrong cluster. Exiting..."; exit 1)
+if [[ ${CI} != "prow" ]]; then
+  # safety measure: make sure we're on the right cluster
+  (kubectl get nodes | grep prow-worker-01) || (echo "Wrong cluster. Exiting..."; exit 1)
+fi
 
 # make sure we use the latest configuration
 sh gen-config.sh
