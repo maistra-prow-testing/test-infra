@@ -74,6 +74,27 @@ presubmits:
           value: /tmp/cache
 
 ## The presubmits below are for the maistra-prow-testing org, which is our test bed
+  maistra-prow-testing/test-infra:
+  - name: push-containers
+    decorate: true
+    always_run: true
+    path_alias: github.com/maistra/test-infra
+    skip_report: false
+    branches:
+      - master
+    labels:
+      preset-quay-pusher: "true"
+    max_concurrency: 1
+    spec:
+      containers:
+      - image: "quay.io/maistra/maistra-builder:1.1"
+        imagePullPolicy: Always
+        command:
+        - wrapdocker
+        - make
+        - maistra-builder.push
+        securityContext:
+          privileged: true
   maistra-prow-testing/istio-operator:
   - name: unittests
     decorate: true
