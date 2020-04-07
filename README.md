@@ -1,6 +1,6 @@
 # Test Infrastructure
 
-This repository is meant to hold all information required to deploy and run Maistra test infrastructure in an Infrastructe-as-Code fashion.
+This repository is meant to hold all information required to deploy and run Maistra test infrastructure in an Infrastructe-as-Code fashion. test
 
 ## Build Container
 
